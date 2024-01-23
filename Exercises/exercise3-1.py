@@ -16,10 +16,13 @@ while control.lower() != 'n':
 
     if miles_driven <= 0:
         print("Miles driven must be greater than zero. Please try again.")
+        continue
     elif gallons_used <= 0:
         print("Gallons used must be greater than zero. Please try again.")
+        continue
     elif cost_per_gallon <= 0:
         print("Gallons used must be greater than zero. Please try again.")
+        continue
     else:
         # calculate and display miles per gallon, gallons of gas used and cost per mile
         mpg = round(miles_driven / gallons_used, 2)
@@ -28,7 +31,8 @@ while control.lower() != 'n':
         print("Miles Per Gallon:          ", mpg)
         print("Total Gas Cost:            ", total_gas_cost)
         print("Cost Per Mile:             ", cost_per_mile)
-        control = input("Get entries for another trip (y/n)?")    
+
+    control = input("Get entries for another trip (y/n)?")    
 
 print()
 print("Bye!")

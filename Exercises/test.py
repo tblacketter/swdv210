@@ -1,6 +1,6 @@
-print("test")
+n = 0
 
-x = 1 + 2
-
-print(x)
+for i in range(0, 10, 2):
+    print(n)
+    n += 1
 
