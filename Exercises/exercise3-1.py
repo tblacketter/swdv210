@@ -8,7 +8,7 @@ print()
 
 control = 'y'
 
-while control != 'n':
+while control.lower() != 'n':
     # get input from the user
     miles_driven = float(input("Enter miles driven:         "))
     gallons_used = float(input("Enter gallons of gas used:  "))
