@@ -1,3 +1,7 @@
+#Teryn Blacketter
+#Exercise 2-1
+#1/23/2024
+
 # display a welcome message
 print("The Miles Per Gallon program")
 print()
