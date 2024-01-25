@@ -1,7 +1,9 @@
 #Teryn Blacketter  
 #Exercise 4-1
 #1/23/2024
-        
+
+import validation as val
+
 def calculate_future_value(monthly_investment, yearly_interest, years):
     # convert yearly values to monthly values
     monthly_interest_rate = yearly_interest / 12 / 100
@@ -20,9 +22,9 @@ def main():
     choice = "y"
     while choice.lower() == "y":
         # get input from the user
-        monthly_investment = float(input("Enter monthly investment:\t"))
-        yearly_interest_rate = float(input("Enter yearly interest rate:\t"))
-        years = int(input("Enter number of years:\t\t"))
+        monthly_investment = val.get_float("Enter monthly investment:\t", 1000, 0)
+        yearly_interest_rate = val.get_float("Enter yearly interest rate:\t", 15, 0)
+        years = val.get_int("Enter number of years:\t\t", 50, 0)
 
         # get and display future value
         future_value = calculate_future_value(
