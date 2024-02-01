@@ -1,0 +1,19 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File", // name of the test
+            "type": "python", // type of file
+            "request": "launch", // action to take 
+            "program": "testing.py", // file you want to run
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": ["testArg"] //Arguments to include
+        }
+
+        // you can have multiple test cases to launch in the debugger
+    ]
+}
