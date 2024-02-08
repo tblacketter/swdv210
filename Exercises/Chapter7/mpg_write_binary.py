@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import csv
+import pickle
 
 def get_miles_driven():
     while (miles_driven := float(input("Enter miles driven:\t"))) <= 0:                    
@@ -46,15 +47,14 @@ def main():
     print("Bye! \n")
     
     #write the binary file
-    with open("trips7_1.bin", "w", newline="") as file:
-        writer = csv.writer(file, delimiter="\t")
-        writer.writerows(triplist)
+    with open("trips7_1.bin", "wb") as file:
+        pickle.dump(triplist, file)
 
     #Test that the binary file is readable
-    with open("trips7_1.bin", "r", newline="") as file:
-        reader = csv.reader(file)
-        for row in reader:
-            print(row)
+    with open("trips7_1.bin", "rb") as file:
+        contents = pickle.load(file)
+        print(contents)
+        
 
 
 if __name__ == "__main__":

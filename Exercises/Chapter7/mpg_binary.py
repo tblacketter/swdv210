@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import csv
+import pickle
 
 def get_miles_driven():
     while (miles_driven := float(input("Enter miles driven:\t"))) <= 0:                    
@@ -14,38 +15,26 @@ def get_gallons_used():
     return gallons_used
 
 def write_trips(tripList: []):
-    with open("trips7_2.bin", "a", newline="") as file:
-        writer = csv.writer(file, delimiter="\t")
-        writer.writerows(tripList)
+    with open("trips7_2.bin", "wb") as file:
+        pickle.dump(tripList, file)
 
 def read_trips()->[]:
-    tempTripList = []
-    try:
-        with open("trips7_2.bin", "r", newline="") as file:
-            reader = csv.reader(file, delimiter="\t")
-            for row in reader:
-                tempTripList.append(row)
-        
-        return tempTripList
-    except:
-        tempTripList = [["Dist", "Gallons", "MPG"]]
-        with open("trips7_2.bin", "w", newline="") as file:
-            writer = csv.writer(file, delimiter="\t")
-            writer.writerows(tempTripList)
 
-        return tempTripList
+    try:
+        with open("trips7_2.bin", "rb") as file:
+            tripList = pickle.load(file)
+        
+        return tripList
+    except:
+        return []
+
     
 def list_trips(tripList: []):
+    print("Distance,\tGallons,\tMPG")
     for list in tripList:
-        tempString = ""
-        for x in range(len(list)):
-            tempString += (list[x] + "\t")
-
-        print(tempString)
+        print(f"{list[0]}\t\t{list[1]}\t\t{list[2]}")
 
 def main():
-
-    tripList = []
 
     # display a welcome message
     print("The Miles Per Gallon program")
@@ -53,8 +42,6 @@ def main():
 
     more = "y"
     while more.lower() == "y":
-
-        tempTripList = []
 
         tripList = read_trips()
         list_trips(tripList)
@@ -65,9 +52,9 @@ def main():
                                  
         mpg = round((miles_driven / gallons_used), 2)
 
-        tempTripList.append([miles_driven, gallons_used, mpg])
+        tripList.append([miles_driven, gallons_used, mpg])
 
-        write_trips(tempTripList)
+        write_trips(tripList)
 
         print(f"Miles Per Gallon:\t{mpg}")
         print()
