@@ -6,16 +6,16 @@ def list(movie_list):
         print("There are no movies in the list.\n")
         return
     else:
-        for movie in movie_list:
-            movie.getStr()
+        for i, movie in enumerate(movie_list, start=1):
+            print(f"{i}. " + movie.getStr())
         print()
 
 def add(movie_list):
     name = input("Name: ")
-    year = input("Year: ")
-    movie = [name, year]
+    year = int(input("Year: "))
+    movie =  Movie(name, year)
     movie_list.append(movie)
-    print(f"{movie[0]} was added.\n")   
+    print(f"{movie.name} was added.\n")   
 
 def delete(movie_list):
     number = int(input("Number: "))
@@ -23,7 +23,7 @@ def delete(movie_list):
         print("Invalid movie number.\n")
     else:
         movie = movie_list.pop(number-1)
-        print(f"{movie[0]} was deleted.\n")
+        print(movie.getStr() + " was deleted.\n")
       
 def display_menu():
     print("COMMAND MENU")

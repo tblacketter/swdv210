@@ -9,6 +9,6 @@ class Movie:
         self.name = nameInit
         self.year = yearInit
 
-    def getStr(self):
-        print(f"{self.name} ({self.year})")
+    def getStr(self) -> str:
+        return (f"{self.name} ({self.year})")
 
