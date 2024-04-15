@@ -9,8 +9,11 @@ def displayGreeting():
 
 def displayMenu():
     print("Menu Options")
-    print("1 - Calcualtae batting average")
+    print("1 - Calculate Batting Average")
     print("2 - Exit Program")
+
+
+
 
 def calculateBattingAverage(bats: int, hits: int) -> int:
     battingAverage = round((bats/hits), 3)
@@ -48,7 +51,7 @@ def main():
 
             while control == 0:
                 if hits > bats:
-                    print("You cant have mor hits than bats...")
+                    print("You cant have more hits than bats...")
                     bats = getNumOfBats()
                     hits = getNumOfHits()
                 else:
