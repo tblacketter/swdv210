@@ -3,9 +3,6 @@ from objects import TaskList, Task
 S1 = "<20"
 S2 = "<10"
 
-personalTaskList = TaskList("Personal")
-businessTaskList = TaskList("Business")
-
 def commandInterface():
     print("COMMAND MENU")
     print(f"{'list':{S2}}{'- List all tasks':{S1}}")
@@ -14,34 +11,62 @@ def commandInterface():
     print(f"{'delete':{S2}}{'- Delete a task':{S1}}")
     print(f"{'switch':{S2}}{'- Switch selected task list':{S1}}")
     print(f"{'exit':{S2}}{'- Exit program':{S1}}")
+    print()
 
-def displayTaskLists():
-    print(f"1. {personalTaskList.description}")
-    print(f"2. {businessTaskList.description}")
+def displayTaskLists(taskLists:list):
+    print("TASK LISTS")
+    count = 1
+    for tasklist in taskLists:
+        print(f"{count}. {tasklist.description}")
+        count += 1
 
-def chooseList()->TaskList:
+def chooseList(taskList:list)->TaskList:
 
     while True:
-        
-        listChoice = int(input("Enter number to select task list: "))
-
-        if listChoice == 1:
-            chosenTaskList = personalTaskList
-            break
-        elif listChoice == 2:
-            chosenTaskList = businessTaskList
-            break
-        else:
-            print("Please enter a valid choice")
+        try:
+            listChoice = int(input("Enter number to select task list: "))
+            if listChoice >= 1 and listChoice <= len(taskList):
+                chosenTaskList = taskList[listChoice-1]
+                break
+            else:
+                print("Please enter a valid choice")
+        except:
+            print("Please enter a valid number")
         
     print(f"{chosenTaskList.description} task list was selected")
     return chosenTaskList
 
+def getInput(tasklist:TaskList)->int:
+    
+    while True:
+        try:
+            taskNum = int(input("Number: "))
+
+            if taskNum > len(tasklist.tasklist) or taskNum < len(tasklist.tasklist):
+                print("Number is not on list please enter a valid number")
+            else:
+                return taskNum  
+        except:
+            print("Please enter a valid number")
+
+def getTaskLists()->list:
+    tempList = []
+    with open("taskLists.txt") as file:
+        for line in file:
+            line = line.replace("\n", "")
+            tempTaskList = TaskList(line)
+            tempTaskList.readTasksFromFile()
+            tempList.append(tempTaskList)
+    return tempList
+
+
 def main():
+    taskLists = getTaskLists()
+
     commandInterface()
 
-    displayTaskLists()
-    chosenTaskList = chooseList()
+    displayTaskLists(taskLists)
+    chosenTaskList = chooseList(taskLists)
 
     while True:
 
@@ -52,14 +77,16 @@ def main():
         elif(commandInput == "add"):
             chosenTaskList.addItem()
         elif(commandInput == "complete"):
-            taskToComplete = int(input("Number: "))
+            taskToComplete = getInput(chosenTaskList)
             chosenTaskList.completeTask(taskToComplete - 1)
         elif(commandInput == "delete"):
-            taskToDelete = int(input("Number: "))
+            taskToDelete = getInput(chosenTaskList)
             chosenTaskList.removeItem(taskToDelete)
         elif(commandInput == "switch"):
-            chosenTaskList = chooseList()
+            chosenTaskList = chooseList(taskLists)
         elif(commandInput == "exit"):
+            for tasks in taskLists:
+                tasks.writeTasksToFile()
             exit()
         else:
             print("Invalid command Try again")

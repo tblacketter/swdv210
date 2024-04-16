@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+import pickle as pickle
 
 @dataclass
 class Task:
@@ -47,3 +48,13 @@ class TaskList:
     def __iter__(self):
         for task in self.tasklist:
             yield task
+
+    def writeTasksToFile(self):
+        filename =  self.description.lower() + ".bin"
+        with open(filename, "wb") as output:
+            pickle.dump(self.tasklist, output)
+
+    def readTasksFromFile(self):
+        filename =  self.description.lower() + ".bin"
+        with open(filename, "rb") as input:
+            self.tasklist = pickle.load(input)
