@@ -61,6 +61,10 @@ def getTaskLists()->list:
 
 
 def main():
+    with open("taskLists.txt", "w") as file:
+        file.write("Personal\n")
+        file.write("Business\n")
+
     taskLists = getTaskLists()
 
     commandInterface()

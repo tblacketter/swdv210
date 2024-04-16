@@ -56,5 +56,10 @@ class TaskList:
 
     def readTasksFromFile(self):
         filename =  self.description.lower() + ".bin"
-        with open(filename, "rb") as input:
-            self.tasklist = pickle.load(input)
+        try:
+            with open(filename, "rb") as input:
+                self.tasklist = pickle.load(input)
+        except:
+            with open(filename, "wb") as output:
+                pass
+        
