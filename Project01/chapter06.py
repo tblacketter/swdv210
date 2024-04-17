@@ -111,6 +111,18 @@ def main():
 
         elif userChoice == "2":
             addPlayer(players)
+        
+        elif userChoice == "3":
+            pass
+
+        elif userChoice == "4":
+            pass
+
+        elif userChoice == "5":
+            pass
+        
+        elif userChoice == "6":
+            pass
 
         elif userChoice == "7":
             print("Bye!")
