@@ -1,3 +1,5 @@
+import fileIO as file
+
 POSITIONS = ("C", "1B", "2B", "3B", "SS", "LF", "CF", "RF", "P")
 DASHES = "=" * 100
 S1 = 20
@@ -143,7 +145,7 @@ def displayPositions():
     print(string)
 
 def calculateBattingAverage(bats: int, hits: int) -> int:
-    battingAverage = round((bats/hits), 3)
+    battingAverage = round((int(bats)/int(hits)), 3)
     return battingAverage
 
 def getNumOfHits()->int:
@@ -164,7 +166,7 @@ def getNumOfBats()->int:
 
 def main():
 
-    players:list = []
+    players:list = file.readFromFile()
 
     displayGreeting()
 
@@ -177,20 +179,26 @@ def main():
 
         elif userChoice == "2":
             addPlayer(players)
+            file.writeToFile(players)
         
         elif userChoice == "3":
             removePlayer(players)
+            file.writeToFile(players)
 
         elif userChoice == "4":
             movePlayer(players)
+            file.writeToFile(players)
 
         elif userChoice == "5":
             editPlayerPosition(players)
+            file.writeToFile(players)
         
         elif userChoice == "6":
             editPlayersStats(players)
+            file.writeToFile(players)
 
         elif userChoice == "7":
+            file.writeToFile(players)
             print("Bye!")
             exit()
 
